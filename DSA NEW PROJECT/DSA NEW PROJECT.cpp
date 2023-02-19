@@ -23,6 +23,12 @@ int main()
 		}
 	} while (MSMR < 1 || MSMR > 3);
 
+	
+
+	
+	if (MSMR == 1)
+	{
+
 
 
 		int new1;
@@ -42,60 +48,64 @@ int main()
 
 
 
-		switch (new1)
-		{
+		
+		
+			if (new1 == 1)
+			{
 
-		case 1:
+			}
+		
 
+			else if (new1 == 2)
+			{
 
-			break;
+			}
+		
+			else if (new1 == 3)
+			{
+				cout << "select Shop\n";
 
+			}
 
-		case 2:
+			else if (new1  == 4)
+			{
+				cout << "select Shop\n";
+			}
 
-			break;
-
-
-		case 3:
-			cout << "select Shop\n";
-			break;
-
-		case 4:
-			cout << "select Shop\n";
-
-			break;
-
-
-
-
-		case 5:
-			cout << "select Shop\n";
-			break;
-
-
-
-		case 6:
-
-			break;
+		
+			else if (new1 == 5)
+			{
+				cout << "select Shop\n";
+			}
 
 
+			else if (new1 == 6)
+			{
+				cout << "select Shop\n";
+			}
+
+			else if (new1 == 7)
+			{
+				
+				cout << "select Shop\n";
+			}
 
 
-		case 7:
+		
 
-			break;
-
-
-		default:
-			break;
-		}
-
+	}
 
 
 
 
 
+	
 
+
+		
+
+	else if (MSMR == 2)
+	{
 
 
 
@@ -117,6 +127,29 @@ int main()
 
 
 
+		if (new2 ==2)
+		{
+
+		}
+
+
+		if (new2 == 2)
+		{
+
+		}
+
+
+		if (new2 == 3)
+		{
+
+		}
+
+
+
+
+
+		if (new2 == )
+		{
 
 		}
 
@@ -125,28 +158,21 @@ int main()
 
 
 
+	
 
+	
+		
 
-
-
-
-
-
-
-
-
-
-
-
-
+	else {
 
 		cout << "You Selected About";
-		break;
+
 	}
 
 
 
 
+		
 
 
 
