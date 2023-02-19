@@ -23,10 +23,7 @@ int main()
 		}
 	} while (MSMR < 1 || MSMR > 3);
 
-	switch (MSMR)
-	{
 
-	case 1:
 
 		int new1;
 		do {
@@ -100,10 +97,8 @@ int main()
 
 
 
-		break;
 
 
-	case 2:
 
 		int new2;
 		do {
@@ -120,22 +115,7 @@ int main()
 		} while (new2 < 1 || new2 > 4);
 
 
-		/// <summary>
-		/// ///
-		/// </summary>
-		/// <returns></returns>
-		
 
-		switch (new2) {
-
-		case 1:
-
-			break;
-
-
-		case 2:
-
-			break;
 
 
 		}
@@ -157,11 +137,9 @@ int main()
 
 
 
-		break;
 
 
 
-	case 3:
 		cout << "You Selected About";
 		break;
 	}
