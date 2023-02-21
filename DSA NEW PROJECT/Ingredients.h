@@ -32,6 +32,7 @@ public:
 		umap = {};
 		
 	};
+	
 	void insertNewIngredient(Ingredient* newIng) {
 		umap.insert(make_pair(newIng->ingredientName, newIng));
 		//cout << "Successfully added" << endl;

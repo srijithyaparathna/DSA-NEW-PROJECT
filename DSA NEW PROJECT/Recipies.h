@@ -211,25 +211,26 @@ public:
 		Ingredients* currentListBestForShopList = shopList->budgetList;
 
 		RecipieNode* currentNode = head;
+		
 		while (currentNode != NULL)
 		{
 			for (auto const& pair : currentNode->elem->currentList->umap)
 			{
+				currentNode->elem->bestOption = new Ingredients();
 				if (currentListBestForShopList->umap.find(pair.first) != currentListBestForShopList->umap.end())
 				{
-					cout << "Element Present\n";
-					currentNode->elem->bestOption->insertNewIngredient(new Ingredient(pair.first ,currentListBestForShopList->getPriceFromKey(pair.first) ,pair.second->shopName));
-						
+					currentNode->elem->bestOption->insertNewIngredient(new Ingredient(pair.first ,currentListBestForShopList->getPriceFromKey(pair.first) ,pair.second->shopName));			
 				}
 				//currentNode->elem->bestOption->insertNewIngredient(new Ingredient("asdas",55,"asdasd"));
 			}
-			currentNode->elem->bestOption->printIngredientsFull();
+			//cout << "Beset Option to Buy the Recipie is " << endl;
+
+			//currentNode->elem->bestOption->printIngredientsFull();
+		
 			currentNode = currentNode->next;
 
 		}
-
-
-	}
+			}
 
 };
 

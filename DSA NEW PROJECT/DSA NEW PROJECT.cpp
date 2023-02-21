@@ -1,10 +1,5 @@
-﻿
-// DSA Mini Project.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
-#include <iostream>
+﻿#include <iostream>
 #include "Recipies.h"
-
 #include <string>
 #include "Shops.h"
 #include "Ingredients.h"
@@ -24,6 +19,14 @@ int main()
 	Ingredient* eggs = new Ingredient("EGGS", 100, "ShopA");
 	ShopAIngredients->insertNewIngredient(rice);
 	ShopAIngredients->insertNewIngredient(eggs);
+    ShopAIngredients->insertNewIngredient(new Ingredient("Jam", 200, "ShopA"));
+    ShopAIngredients->insertNewIngredient(new Ingredient("Coconut", 100, "ShopA"));
+    ShopAIngredients->insertNewIngredient(new Ingredient("Vanilla", 250, "ShopA"));
+    ShopAIngredients->insertNewIngredient(new Ingredient("BakingPowder", 250, "ShopA"));
+    ShopAIngredients->insertNewIngredient(new Ingredient("Fish", 250, "ShopA"));
+    ShopAIngredients->insertNewIngredient(new Ingredient("Chillie", 100, "ShopA"));
+
+
 
 
 	//ShopB
@@ -33,6 +36,14 @@ int main()
 	//Ingredient* eggs = new Ingredient("EGGS", 100, "ShopA");
 	ShopBIngredients->insertNewIngredient(rice2);
 	ShopBIngredients->insertNewIngredient(eggs2);
+    ShopBIngredients->insertNewIngredient(new Ingredient("Jam", 400, "ShopB"));
+    ShopBIngredients->insertNewIngredient(new Ingredient("Coconut", 50, "ShopB"));
+    ShopBIngredients->insertNewIngredient(new Ingredient("Vanilla", 300, "ShopB"));
+    ShopBIngredients->insertNewIngredient(new Ingredient("BakingPowder", 200, "ShopB"));
+    ShopBIngredients->insertNewIngredient(new Ingredient("Chicken", 200, "ShopB"));
+    ShopBIngredients->insertNewIngredient(new Ingredient("Fish", 500, "ShopB"));
+
+
 
 	Shop* ShopB = new Shop(2, "ShopB", ShopBIngredients);
 	Shop* ShopA = new Shop(1, "ShopA", ShopAIngredients);
@@ -40,24 +51,23 @@ int main()
 	GalleShops->insertFirst(ShopB);
 
 
+
+ 
+    /*   Recipie* Cake = new Recipie();
+    Cake->recipieName = "CAKE";
+    Cake->currentList->insertNewIngredient(new Ingredient("Vanilla", 250, "ShopA"));
+    Cake->currentList->insertNewIngredient(new Ingredient("BakingPowder", 250, "ShopA"));
+    Cake->currentList->insertNewIngredient(new Ingredient("Sugar", 250, "ShopA"));
+    MyRecipies->insertFirst(Cake);
+
+    Recipie* Rice = new Recipie();
+    Rice->recipieName = "FRIED RICE";
+    Rice->currentList->insertNewIngredient(new Ingredient("RICE", 250, "ShopA"));
+    Rice->currentList->insertNewIngredient(new Ingredient("EGGS", 250, "ShopA"));
+    Rice->currentList->insertNewIngredient(new Ingredient("Fish", 250, "ShopA"));
+    MyRecipies->insertFirst(Rice);*/
+
 	//-------------------------------------------//
-
-
-
-	//AddANewSHop(GalleShops);
-
-	//GalleShops->budgetListGen();
-	//GalleShops->print();
-
-	/*AddNewRecipie(GalleShops, MyRecipies);
-	MyRecipies->calculateBestOption(GalleShops);*/
-	/*AddANewSHop(GalleShops);
-	DeleteAShop(GalleShops);
-	EditShopIngredients(GalleShops);
-	AddNewShopIngredient(GalleShops);
-	DeleteShopIngredient(GalleShops);
-	ShowShopItems(GalleShops);*/
-	
 
     int main_choice, sub_choice;
 
@@ -75,7 +85,7 @@ __________            .___                   __      _________.__
         )" << '\n';
         std::cout << "------------------Main Menu---------------- \n";
 
-        std::cout << "(1)Manage Shop\n(2)Manage Recipies\n(3)About \n\n ";
+        std::cout << "(1)Manage Shop\n(2)Manage Recipies\n\n ";
         cout << "Enter your choice: ";
         cin >> main_choice;
         switch (main_choice) {
@@ -144,23 +154,18 @@ __________            .___                   __      _________.__
                 }
             }
             break;
-        case 3:
-            cout << "Exiting program." << endl;
-            return 0;
+        
         default:
             cout << "Invalid choice." << endl;
             break;
         }
 
-    main_menu:
+        main_menu:
         // This label allows the user to go back to the main menu from the submenus
         continue;
     }
 
     return 0;
-
-
-	
 
 
 }

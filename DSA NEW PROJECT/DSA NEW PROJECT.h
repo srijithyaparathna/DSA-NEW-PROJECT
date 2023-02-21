@@ -194,8 +194,12 @@ void DisplayRecipie(Recipies* r)
 	{
 		int selectedRecipieIndex = SelectableRecipieList(r);
 		Recipie* selectedRecipie = r->getRecipieAt(selectedRecipieIndex);
+		cout << "------------------------" << endl;
+		cout << "Recipie Name :" << selectedRecipie->recipieName <<endl;
+		cout << "------------------------" << endl;
 		cout << "Recipie list" << endl;
 		selectedRecipie->currentList->printIngredientsOnly();
+		cout << "------------------------" << endl;
 		cout << "Buying Recommendation" << endl;
 		selectedRecipie->currentList->printIngredientsFull();
 	}
