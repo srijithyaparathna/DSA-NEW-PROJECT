@@ -201,7 +201,7 @@ public:
 
         while (current != NULL) {
             std::cout << current->shop->shopName << endl;
-            current->shop->shopIngr->printIngredients();
+            //current->shop->shopIngr->printIngredients();
             current = current->next;
         }
         std::cout << std::endl;
@@ -226,7 +226,7 @@ public:
         {
             Shop* currentShop = current->shop;
             int i = 1;
-            for (auto const& pair : currentShop->shopIngr->umap) {
+            for (auto const& pair : currentShop->shopIngr->hashTable) {
                 uniqueList->insertNewIngredient(new Ingredient(pair.first,pair.second->ingredientPrice,pair.second->shopName));
             }
             current = current->next;
@@ -238,7 +238,7 @@ public:
     void budgetListGen() 
     {
         getUniqueIngredientList();
-        for (auto const& pair : uniqueList->umap) 
+        for (auto const& pair : uniqueList->hashTable) 
         {
             string key = pair.first;
             int price = 0;
@@ -249,8 +249,9 @@ public:
                 //cout << i << endl;
                 Shop* shopAt = getShopAt(i);
                 shopName = shopAt->shopName;
-                //cout <<shopName << " " << shopAt->shopIngr->umap.size() << endl;
-                int cPrice = shopAt->shopIngr->getPriceFromKey(key);
+                //cout <<shopName << " " << shopAt->shopIngr->hashTable.size() << endl;
+                //shopAt->shopIngr->printIngredients();
+                int cPrice = shopAt->shopIngr->getPriceFromKeyByTraversal(key);
 
                 if (cPrice!=-1)
                 {
@@ -261,6 +262,7 @@ public:
                     else {
                         if (cPrice < price)
                         {
+                            cout << cPrice << " < " << price << endl;
                             price = cPrice;
                         }
                     }

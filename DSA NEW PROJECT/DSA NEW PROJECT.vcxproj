@@ -24,6 +24,7 @@
     <ProjectGuid>{9f0a5048-ebe5-45d2-80c4-a1ef90f80585}</ProjectGuid>
     <RootNamespace>DSANEWPROJECT</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>BudgetShopper</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

@@ -26,22 +26,23 @@ public:
 
 class Ingredients {
 public:
-	unordered_map<string, Ingredient*> umap;
+	unordered_map<string, Ingredient*> hashTable;
 	
 	Ingredients() {
-		umap = {};
+		hashTable = {};
 		
 	};
+	
 	void insertNewIngredient(Ingredient* newIng) {
-		umap.insert(make_pair(newIng->ingredientName, newIng));
+		hashTable.insert(make_pair(newIng->ingredientName, newIng));
 		//cout << "Successfully added" << endl;
 	}
 
 	void printIngredients()
 	{
 		int i = 1;
-		for (auto const& pair : umap) {
-			std::cout << i << " " << pair.first << ": " << pair.second->ingredientPrice << "\n";
+		for (auto const& pair : hashTable) {
+			std::cout << i << " " << pair.first << ": Rs. " << pair.second->ingredientPrice << "\n";
 			i++;
 		}
 	}
@@ -49,7 +50,7 @@ public:
 	void printIngredientsOnly()
 	{
 		int i = 1;
-		for (auto const& pair : umap) {
+		for (auto const& pair : hashTable) {
 			std::cout << i << " " << pair.first  << "\n";
 			i++;
 		}
@@ -58,18 +59,31 @@ public:
 	void printIngredientsFull()
 	{
 		int i = 1;
-		for (auto const& pair : umap) {
-			std::cout << i << " "  << "Buy  " << pair.first << " for " << pair.second->ingredientPrice << " from " << pair.second->shopName << "\n";
+		for (auto const& pair : hashTable) {
+			std::cout << i << " "  << "Buy  " << pair.first << " for Rs.  " << pair.second->ingredientPrice << " from " << pair.second->shopName << "\n";
 			i++;
 		}
 	}
 
 
 	int getPriceFromKey(string key) {
-		if (umap.find(key) == umap.end())
+		if (hashTable.find(key) == hashTable.end())
 			return -1;
 		else
-			return umap.find(key)->second->ingredientPrice;
+			return hashTable.find(key)->second->ingredientPrice;
+
+	}
+
+	int getPriceFromKeyByTraversal(string key) {
+		int i = 0;
+		for (auto const& pair : hashTable) {
+			if (pair.first == key)
+			{
+				return pair.second->ingredientPrice;
+			}
+			i++;
+		}
+		return i;
 
 	}
 
@@ -77,7 +91,7 @@ public:
 	{
 		string key;
 		int i = 1;
-		for (auto const& pair : umap) {
+		for (auto const& pair : hashTable) {
 			if (i == pos)
 			{
 				key = pair.first;

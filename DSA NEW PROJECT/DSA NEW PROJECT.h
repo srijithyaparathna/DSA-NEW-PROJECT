@@ -1,27 +1,53 @@
+void mainArt() {
+	system("cls");
+
+	std::cout << R"(
+
+__________            .___                   __      _________.__                                             
+\______   \ __ __   __| _/   ____    ____  _/  |_   /   _____/|  |__    ____  ______  ______    ____  _______ 
+ |    |  _/|  |  \ / __ |   / ___\ _/ __ \ \   __\  \_____  \ |  |  \  /  _ \ \____ \ \____ \ _/ __ \ \_  __ \
+ |    |   \|  |  // /_/ |  / /_/  >\  ___/  |  |    /        \|   Y  \(  <_> )|  |_> >|  |_> >\  ___/  |  | \/
+ |______  /|____/ \____ |  \___  /  \___  > |__|   /_______  /|___|  / \____/ |   __/ |   __/  \___  > |__|   
+        \/             \/ /_____/       \/                 \/      \/         |__|    |__|         \/    
+
+        )" << '\n';
+};
+
 
 void Update(Shops* shops, Recipies* r)
 {
 	r->calculateBestOption(shops);
 }
 
-
+void ShowSingleShop(Shop* shop) {
+	cout << "------------------------" << endl;
+	cout << "Shop Name :" << shop->shopName << endl;
+	cout << "------------------------" << endl;
+	shop->shopIngr->printIngredients();
+	cout << "------------------------" << endl;
+}
 void AddANewSHop(Shops* ShopList,Recipies* r) {
 	cout << "------------------------" << endl;
 
 	string shopName;
 	int size = ShopList->size;
 	cout << "Enter Shop Name" << endl;
-	cin >> shopName;
+	/*cin.clear();
+	cin.sync();*/
+	getline(cin>>ws>>ws, shopName);
 	Ingredients* list = new Ingredients();
 
 	bool running = true;
+	//
+
 	while (running)
 	{
 		
 		string name;
 		int price;
 		cout << "Enter Ingridient Name" << endl;
-		cin >> name;
+		
+		getline(cin>>ws>>ws, name);
 		cout << "Enter Ingridient Price" << endl;
 		cin >> price;
 
@@ -34,11 +60,13 @@ void AddANewSHop(Shops* ShopList,Recipies* r) {
 		{
 			running = false;
 		}
-
+		
 	}
 	ShopList->insertFirst(new Shop(size++, shopName, list));
+	cout << "------------------------" << endl;
 
 	cout << "Shop Added Successfully \n";
+	cout << "------------------------" << endl;
 
 	//ShopList->print();
 	Update(ShopList,r);
@@ -76,7 +104,14 @@ void DeleteAShop(Shops *ShopList, Recipies* r)
 	//cout << "Select a " << endl;
 	int selectedShop = SelectableShopList(ShopList);
 	ShopList->deleteAt(selectedShop);
-	ShopList->print();
+	cout << "------------------------" << endl;
+
+	cout << "Shop Deleted Successfully" << endl;
+	cout << "------------------------" << endl;
+
+	//cout << "New Shop List" << endl;
+
+	//ShopList->print();
 	Update(ShopList,r);
 
 }
@@ -88,12 +123,12 @@ void EditShopIngredients(Shops* ShopList,Recipies* r) {
 	cout << selectedIngredient;
 	string key = selectedShopObj->shopIngr->selectIngredientAsKey(selectedIngredient);
 	int pp;
-	cout << "Enter new price for the item" << endl;
+	cout << "\nEnter new price for the item" << endl;
 	cin >> pp;
-
-
-	selectedShopObj->shopIngr->umap.at(key) = new Ingredient(key, pp, selectedShopObj->shopName);
-	ShopList->print();
+	selectedShopObj->shopIngr->hashTable.at(key) = new Ingredient(key, pp, selectedShopObj->shopName);
+	//ShopList->print();
+	cout << "Updated Shop" << endl;
+	ShowSingleShop(ShopList->getShopAt(selectedShop));
 	Update(ShopList,r);
 }
 
@@ -103,12 +138,18 @@ void AddNewShopIngredient(Shops* ShopList,Recipies* r)
 	int selectedShop = SelectableShopList(ShopList);
 	int price; string name;
 	cout << "Enter new Item name" << endl;
-	cin >> name;
+	
+	getline(cin>>ws, name);
 	cout << "Enter the price" << endl;
 	cin >> price;
 	Shop* selectedShopObject = ShopList->getShopAt(selectedShop);
 	selectedShopObject->shopIngr->insertNewIngredient(new Ingredient(name,price,selectedShopObject->shopName));
-	selectedShopObject->shopIngr->printIngredients();
+	//selectedShopObject->shopIngr->printIngredients();
+	cout << "------------------------" << endl;
+
+	cout << "Updated Shop" << endl;
+
+	ShowSingleShop(selectedShopObject);
 
 	Update(ShopList,r);
 
@@ -122,17 +163,22 @@ void DeleteShopIngredient(Shops* ShopList,Recipies* r)
 	int selectedIngredient = SelectableIngredientList(selectedShopObj->shopIngr);
 	cout << selectedIngredient;
 	string key = selectedShopObj->shopIngr->selectIngredientAsKey(selectedIngredient);
-	selectedShopObj->shopIngr->umap.erase(key);
-	ShopList->print();
+	selectedShopObj->shopIngr->hashTable.erase(key);
+	//ShopList->print();
+	cout << "Updated Shop" << endl;
+	ShowSingleShop(selectedShopObj);
+
 	Update(ShopList,r);
 }
 
 void ShowShopItems(Shops* ShopList,Recipies* r) {
 	int selectedShop = SelectableShopList(ShopList);
 	Shop* selectedShopObj = ShopList->getShopAt(selectedShop);
-	selectedShopObj->shopIngr->printIngredients();
+	ShowSingleShop(selectedShopObj);
 	Update(ShopList,r);
 }
+
+
 
 Ingredients* getUniqueIngredients(Shops* ShopList) 
 {
@@ -152,10 +198,10 @@ void AddNewRecipie(Shops* ShopList, Recipies* myR)
 
 	string rName;
 	cout << "Enter a Recipie name " << endl;
-	cin >> rName;
+	
+	getline(cin>>ws, rName);
 	newR->recipieName = rName;
 	int selectedIng = 0;
-	cout << "Enter '-1' to exit to stop adding" << endl;
 
 	while (selectedIng != -1) {
 		
@@ -163,8 +209,10 @@ void AddNewRecipie(Shops* ShopList, Recipies* myR)
 		selectedIng = SelectableIngredientList(currentUniqueIngs);
 		if (selectedIng != -1)
 		{
+			cout << "Enter '-1' to exit to stop adding" << endl;
+
 			string selectedIngOb_key = currentUniqueIngs->selectIngredientAsKey(selectedIng);
-			Ingredient* SelectedObject = currentUniqueIngs->umap.at(selectedIngOb_key);
+			Ingredient* SelectedObject = currentUniqueIngs->hashTable.at(selectedIngOb_key);
 			newList->insertNewIngredient(SelectedObject);
 		}	
 	}
@@ -188,16 +236,26 @@ int SelectableRecipieList(Recipies* rList)
 	return selectedIndex - 1;
 }
 
-void DisplayRecipie(Recipies* r)
+void DisplayRecipie(Recipies* r,Shops* s)
 {
+	r->calculateBestOption(s);
 	if (r->size > 0)
 	{
 		int selectedRecipieIndex = SelectableRecipieList(r);
 		Recipie* selectedRecipie = r->getRecipieAt(selectedRecipieIndex);
+		cout << "------------------------" << endl;
+		cout << "Recipie Name :" << selectedRecipie->recipieName <<endl;
+		cout << "------------------------" << endl;
 		cout << "Recipie list" << endl;
+		cout << "------------------------" << endl;
+
 		selectedRecipie->currentList->printIngredientsOnly();
+		cout << "------------------------" << endl;
 		cout << "Buying Recommendation" << endl;
-		selectedRecipie->currentList->printIngredientsFull();
+		cout << "------------------------" << endl;
+		selectedRecipie->bestOption->printIngredientsFull();
+		cout << "------------------------" << endl;
+
 	}
 	else {
 		cout << "No Recipies Found" << endl;
@@ -216,8 +274,8 @@ void DeleteARecipieIngredient(Recipies* r,Shops* sList)
 	cout << "Select An Ingredient to Delete" << endl;
 	int selectedIngredient = SelectableIngredientList(selectedRecipie->currentList);
 	string key = selectedRecipie->currentList->selectIngredientAsKey(selectedIngredient);
-	selectedRecipie->currentList->umap.erase(key);
-	selectedRecipie->currentList->umap.erase(key);
+	selectedRecipie->currentList->hashTable.erase(key);
+	selectedRecipie->currentList->hashTable.erase(key);
 	cout << "Successfully deleted." << endl;
 }
 
@@ -245,7 +303,7 @@ void AddNewIngredientToARecipie(Recipies* r,Shops *ShopList)
 		if (selectedIng != -1)
 		{
 			string selectedIngOb_key = currentUniqueIngs->selectIngredientAsKey(selectedIng);
-			Ingredient* SelectedObject = currentUniqueIngs->umap.at(selectedIngOb_key);
+			Ingredient* SelectedObject = currentUniqueIngs->hashTable.at(selectedIngOb_key);
 			selectedRecipie->currentList->insertNewIngredient(SelectedObject);
 			cout << "Ingredient successfully added to the Recipie" << endl;
 		}
